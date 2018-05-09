@@ -2,7 +2,7 @@ name: media_refresh
 description: Flutter Plugin for refreshing android gallery
 version: 0.0.1
 author: Fendy Jong <fendy@sevenmaps.com>
-homepage: 
+homepage: https://github.com/fendyjong/media_refresh
 
 dependencies:
   flutter:
@@ -47,3 +47,7 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.io/custom-fonts/#from-packages
+
+environment:
+  sdk: ">=1.19.0 <2.0.0"
+  flutter: "^0.1.2"
