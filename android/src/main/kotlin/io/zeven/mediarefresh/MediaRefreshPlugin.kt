@@ -18,7 +18,7 @@ class MediaRefreshPlugin() : MethodCallHandler {
 
 	override fun onMethodCall(call: MethodCall, result: Result): Unit {
 		if (call.method.equals("scanFile")) {
-			String url = call . argument ("url")
+			val url = call.argument<String>("url")
 			MediaScannerConnection.scanFile(url)
 			result.success(true)
 		} else {
