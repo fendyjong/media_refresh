@@ -21,7 +21,7 @@ class MediaRefreshPlugin private constructor(private val mRegistrar: Registrar) 
 	override fun onMethodCall(call: MethodCall, result: Result): Unit {
 		when (call.method) {
 			"scanFile" -> {
-				val url = call.argument<String>("url")
+				val url: String = call.argument("url")
 				MediaScannerConnection.scanFile(mRegistrar.context(), arrayOf(url), null, null)
 				result.success(true)
 			}
