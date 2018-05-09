@@ -7,22 +7,25 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.PluginRegistry.Registrar
 
-class MediaRefreshPlugin() : MethodCallHandler {
+class MediaRefreshPlugin private constructor(private val mRegistrar: Registrar) : MethodCallHandler {
+	private val registrar: Registrar? = null
+
 	companion object {
 		@JvmStatic
 		fun registerWith(registrar: Registrar): Unit {
 			val channel = MethodChannel(registrar.messenger(), "media_refresh")
-			channel.setMethodCallHandler(MediaRefreshPlugin())
+			channel.setMethodCallHandler(MediaRefreshPlugin(registrar))
 		}
 	}
 
 	override fun onMethodCall(call: MethodCall, result: Result): Unit {
-		if (call.method.equals("scanFile")) {
-			val url = call.argument<String>("url")
-			MediaScannerConnection.scanFile(url)
-			result.success(true)
-		} else {
-			result.notImplemented()
+		when (call.method) {
+			"scanFile" -> {
+				val url = call.argument<String>("url")
+				MediaScannerConnection.scanFile(mRegistrar.context(), arrayOf(url), null, null)
+				result.success(true)
+			}
+			else -> result.notImplemented()
 		}
 
 		/*
